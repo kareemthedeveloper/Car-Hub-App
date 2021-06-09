@@ -12,7 +12,7 @@ const MAKE_ERROR = 'Error loading Make Types'
 import { publish, MessageContext }  from 'lightning/messageService'
 import CARS_FILTERED_MESSAGE from '@salesforce/messageChannel/carsFiltered__c'
 export default class CarFilter extends LightningElement {
-    filters={
+    filters = {
         searchKey:'',
         maxPrice:999999
     }
@@ -61,7 +61,7 @@ export default class CarFilter extends LightningElement {
         const {name, value} = event.target.dataset
         
         if(event.target.checked) {
-            if(!this.filters[name].includes(value)){
+            if(!this.filters[name].includes(value)) {
                 this.filters[name] = [...this.filters[name], value]
             }
         } else {
@@ -70,6 +70,7 @@ export default class CarFilter extends LightningElement {
         this.sendDataToCarList()
     }
 
+    //Delay the publish using a timer to use this service call again
     sendDataToCarList() {
         window.clearTimeout(this.timer)
         this.timer = window.setTimeout(()=>{
